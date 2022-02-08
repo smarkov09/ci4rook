@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/master');
+<?= $this->extend('layouts/dashb');
 $this->section('title') ?> Show Post <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
