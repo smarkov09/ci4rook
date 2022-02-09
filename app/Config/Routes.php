@@ -50,6 +50,24 @@ $routes->post('login', 'UserController::loginValidate');
 $routes->get('dashboard', 'UserController::dashboard', ['filter' => 'auth']);
 $routes->get('logout', 'UserController::logout');
 
+// countries routes
+$routes->get('countries', 'CountryController::index', ['filter' => 'auth']);
+$routes->get('countries/new', 'CountryController::new', ['filter' => 'auth']);
+$routes->post('countries', 'CountryController::create', ['filter' => 'auth']);
+$routes->get('countries/(:num)', 'CountryController::show/$1', ['filter' => 'auth']);
+$routes->get('countries/edit/(:num)', 'CountryController::edit/$1', ['filter' => 'auth']);
+$routes->put('countries/(:num)', 'CountryController::update/$1', ['filter' => 'auth']);
+$routes->delete('countries/(:num)', 'CountryController::delete/$1', ['filter' => 'auth']);
+
+// regions routes
+$routes->get('regions', 'RegionController::index', ['filter' => 'auth']);
+$routes->get('regions/new', 'RegionController::new', ['filter' => 'auth']);
+$routes->post('regions', 'RegionController::create', ['filter' => 'auth']);
+$routes->get('regions/(:num)', 'RegionController::show/$1', ['filter' => 'auth']);
+$routes->get('regions/edit/(:num)', 'RegionController::edit/$1', ['filter' => 'auth']);
+$routes->put('regions/(:num)', 'RegionController::update/$1', ['filter' => 'auth']);
+$routes->delete('regions/(:num)', 'RegionController::delete/$1', ['filter' => 'auth']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
