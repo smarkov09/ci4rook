@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Region extends Model
+class CountryModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'regions';
-    protected $primaryKey       = 'region_id';
+    protected $table            = 'country';
+    protected $primaryKey       = 'country_id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['region_name', 'country_id'];
+    protected $allowedFields    = ['country_name'];
 
     // Dates
     protected $useTimestamps = true;
@@ -39,21 +39,4 @@ class Region extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getCountriesDropdown()
-    {/*
-        $db = \Config\Database::connect();
-        $builder = $db->table('countries');
-        $builder->select('countries_name, countries_id');
-
-
-        $this->db->select('countries_name', 'countries_id');
-        $query = $this->db->get($this->table);
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[$row->countries_id] = $row->countries_name;
-            }
-            return $data;
-        }*/
-    }
 }
