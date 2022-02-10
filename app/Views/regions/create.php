@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/dashb');
-$this->section('title') ?> Create Country <?= $this->endSection() ?>
+$this->section('title') ?> Create Region <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <div class="container">
@@ -20,9 +20,21 @@ $this->section('title') ?> Create Country <?= $this->endSection() ?>
                         <h5 class="card-title">Create Region</h5>
                     </div>
                     <div class="card-body p-4">
+                    <div class="form-group mb-3 has-validation">
+                            <label class="form-label">Country</label>
+                            <select name="country_id" id="country" class="form-control input-lg">
+                                <option value="">Select Country</option>
+                                <?php
+                                foreach($country as $row)
+                                {
+                                    echo '<option value="'.$row["countries_id"].'">'.$row["countries_name"].'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
                         <div class="form-group mb-3 has-validation">
                             <label class="form-label">Region Name</label>
-                            <input type="text" class="form-control <?php if($validation->getError('region_name')): ?>is-invalid<?php endif ?>" name="region_name" placeholder="Region Name" value="<?php echo set_value('region_name'); ?>"/>
+                            <input type="text" class="form-control <?php if($validation->getError('region_name')): ?>is-invalid<?php endif ?>" name="region_name" placeholder="Region Name" value="<?php echo set_value('region_name'); ?>" required/>
                             <?php if ($validation->getError('region_name')): ?>
                                 <div class="invalid-feedback">
                                     <?= $validation->getError('region_name') ?>
@@ -40,4 +52,85 @@ $this->section('title') ?> Create Country <?= $this->endSection() ?>
     </div>
 </div>
 
+
+
 <?= $this->endSection() ?>
+
+
+<?= $this->section('pageLevelCustomScripts') ?>
+<script>
+
+$(document).ready(function(){
+
+    $('#country').change(function(){
+
+        var country_id = $('#country').val();
+
+        var action = 'get_country';
+
+        if(country_id != '')
+        {
+            $.ajax({
+                url:"<?php echo base_url('/regioncontroller/action'); ?>",
+                method:"POST",
+                data:{country_id:country_id, action:action},
+                dataType:"JSON",
+                success:function(data)
+                {
+                    var html = '<option value="">Select Country</option>';
+
+                    for(var count = 0; count < data.length; count++)
+                    {
+
+                        html += '<option value="'+data[count].countries_id+'">'+data[count].countries_name+'</option>';
+
+                    }
+
+                    $('#state').html(html);
+                }
+            });
+        }
+        else
+        {
+            $('#state').val('');
+        }
+        $('#city').val('');
+    });
+
+    $('#state').change(function(){
+
+        var state_id = $('#state').val();
+
+        var action = 'get_city';
+
+        if(state_id != '')
+        {
+            $.ajax({
+                url:"<?php echo base_url('/dynamicdependent/action'); ?>",
+                method:"POST",
+                data:{state_id:state_id, action:action},
+                dataType:"JSON",
+                success:function(data)
+                {
+                    var html = '<option value="">Select City</option>';
+
+                    for(var count = 0; count < data.length; count++)
+                    {
+                        html += '<option value="'+data[count].city_id+'">'+data[count].city_name+'</option>';
+                    }
+
+                    $('#city').html(html);
+                }
+            });
+        }
+        else
+        {
+            $('#city').val('');
+        }
+
+    });
+
+});
+
+</script>
+<?= $this->endSection(); ?>

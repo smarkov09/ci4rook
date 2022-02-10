@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\Region;
+use App\Models\Country;
 
 class RegionController extends ResourceController
 {
@@ -54,7 +55,10 @@ class RegionController extends ResourceController
      */
     public function new()
     {
-        return view('regions/create');
+        $country = new \App\Models\Country();
+        $data['country'] = $country->orderBy('countries_name', 'ASC')->findAll();
+
+        return view('regions/create', $data);
     }
 
     /**
@@ -64,8 +68,10 @@ class RegionController extends ResourceController
      */
     public function create()
     {
-        $country = new \App\Models\Country();
-        $countries = $country->findAll();
+        //$country = new \App\Models\Country();
+        //$countries = $country->findAll();
+        //$data['country'] = $countryModel->orderBy('country_name', 'ASC')->findAll();
+        //$countrydata = $countryModel->where('country_id', $this->request->getVar('country_id'))->findAll();
         
         $inputs = $this->validate([
             'region_name' => 'required',
@@ -114,7 +120,7 @@ class RegionController extends ResourceController
     {
         $inputs = $this->validate([
             'region_name' => 'required',
-            'country_id' => 'required',
+            //'country_id' => 'required',
         ]);
 
         if (!$inputs) {
@@ -126,7 +132,7 @@ class RegionController extends ResourceController
         $this->region->save([
             'region_id' => $id,
             'region_name' => $this->request->getVar('region_name'),
-            'country_id' => $this->request->getVar('country_id')
+            //'country_id' => $this->request->getVar('country_id')
         ]);
 
         session()->setFlashdata('success', 'Success! Region updated.');
@@ -143,5 +149,20 @@ class RegionController extends ResourceController
         $this->region->delete($id);
         session()->setFlashdata('success', 'Success! Region deleted.');
         return redirect()->to(base_url('/regions'));
+    }
+
+    // country dropdown
+    public function action()
+    {
+        if ($this->request->getVar('action')) {
+            
+            $action = $this->request->getVar('action');
+
+            if ($action == 'get_country') {
+                $countryModel = new Country();
+                $countrydata = $countryModel->where('country_id', $this->request->getVar('country_id'))->findAll();
+                echo json_encode($countrydata);
+            }
+        }
     }
 }

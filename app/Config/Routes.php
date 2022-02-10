@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'UserController::login');
 
+$routes->get('/dynamic', 'DynamicDependent::index');
+
 // posts routes
 $routes->get('posts', 'PostController::index');
 $routes->get('posts/new', 'PostController::new');
@@ -67,6 +69,15 @@ $routes->get('regions/(:num)', 'RegionController::show/$1', ['filter' => 'auth']
 $routes->get('regions/edit/(:num)', 'RegionController::edit/$1', ['filter' => 'auth']);
 $routes->put('regions/(:num)', 'RegionController::update/$1', ['filter' => 'auth']);
 $routes->delete('regions/(:num)', 'RegionController::delete/$1', ['filter' => 'auth']);
+
+// cities routes
+$routes->get('cities', 'CityController::index', ['filter' => 'auth']);
+$routes->get('cities/new', 'CityController::new', ['filter' => 'auth']);
+$routes->post('cities', 'CityController::create', ['filter' => 'auth']);
+$routes->get('cities/(:num)', 'CityController::show/$1', ['filter' => 'auth']);
+$routes->get('cities/edit/(:num)', 'CityController::edit/$1', ['filter' => 'auth']);
+$routes->put('cities/(:num)', 'CityController::update/$1', ['filter' => 'auth']);
+$routes->delete('cities/(:num)', 'CityController::delete/$1', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

@@ -47,7 +47,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(); ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-golf-ball"></i>
                 </div>
@@ -72,6 +72,31 @@
                 <a class="nav-link <?= (current_url() == base_url('/posts')) ? 'active' : ''; ?>" href="<?= site_url('posts') ?>">
                 <i class="fas fa-address-book"></i>
                     <span>Posts</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Country/State/City
+            </div>
+
+            <!-- Nav Item - Posts -->
+            <li class="nav-item <?= (current_url() == base_url('/countries')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/countries')) ? 'active' : ''; ?>" href="<?= site_url('countries') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Countries</span></a>
+            </li>
+            <li class="nav-item <?= (current_url() == base_url('/regions')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/regions')) ? 'active' : ''; ?>" href="<?= site_url('regions') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Regions</span></a>
+            </li>
+            <li class="nav-item <?= (current_url() == base_url('/cities')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/cities')) ? 'active' : ''; ?>" href="<?= site_url('cities') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Cities</span></a>
             </li>
 
             <!-- Divider -->

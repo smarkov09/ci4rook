@@ -1,5 +1,5 @@
 <?= $this->extend('layouts/dashb');
-$this->section('title') ?> Regions <?= $this->endSection() ?>
+$this->section('title') ?> Cities <?= $this->endSection() ?>
 
 <?= $this->section('customStyles'); ?>
 <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -10,12 +10,12 @@ $this->section('title') ?> Regions <?= $this->endSection() ?>
 <?= $this->section('content'); ?>
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Regions</h1>
+<h1 class="h3 mb-4 text-gray-800">Cities</h1>
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <!--<h6 class="m-0 font-weight-bold text-primary">Posts</h6>-->
-                            <div class="text-end"><a href="<?= base_url('regions/new') ?>" class="btn btn-primary">Add Region</a></div>
+                            <div class="text-end"><a href="<?= base_url('cities/new') ?>" class="btn btn-primary">Add City</a></div>
                             <?php
                         if(session()->getFlashdata('success')):?>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -39,30 +39,30 @@ $this->section('title') ?> Regions <?= $this->endSection() ?>
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Region Name</th>
+                                            <th>City Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Region Name</th>
+                                            <th>City Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                     <?php 
-                                        if (count($regions) > 0):
-                                            foreach ($regions as $post): ?>
+                                        if (count($cities) > 0):
+                                            foreach ($cities as $post): ?>
                                                 <tr>
-                                                    <td><?= $post['region_id'] ?></td>
-                                                    <td><?= $post['region_name'] ?></td>
+                                                    <td><?= $post['city_id'] ?></td>
+                                                    <td><?= $post['city_name'] ?></td>
                                                     <td class="d-flex">
-                                                        <a href="<?= base_url('regions/'.$post['region_id']) ?>" class="btn btn-sm btn-info mx-1" title="Show"><i class="fas fa-info-circle"></i></a>
-                                                        <a href="<?= base_url('regions/edit/'.$post['region_id']) ?>" class="btn btn-sm btn-success mx-1" title="Edit"><i class="fas fa-edit"></i></a>
-                                                        <form class="display-none" method="post" action="<?= base_url('regions/'.$post['region_id'])?>" id="postDeleteForm<?=$post['region_id']?>">
+                                                        <a href="<?= base_url('cities/'.$post['city_id']) ?>" class="btn btn-sm btn-info mx-1" title="Show"><i class="fas fa-info-circle"></i></a>
+                                                        <a href="<?= base_url('cities/edit/'.$post['city_id']) ?>" class="btn btn-sm btn-success mx-1" title="Edit"><i class="fas fa-edit"></i></a>
+                                                        <form class="display-none" method="post" action="<?= base_url('cities/'.$post['city_id'])?>" id="postDeleteForm<?=$post['city_id']?>">
                                                         <input type="hidden" name="_method" value="DELETE"/>
-                                                            <a href="javascript:void(0)" onclick="deletePost('postDeleteForm<?=$post['region_id']?>')" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                                            <a href="javascript:void(0)" onclick="deletePost('postDeleteForm<?=$post['city_id']?>')" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></a>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -84,7 +84,7 @@ $this->section('title') ?> Regions <?= $this->endSection() ?>
 
    <script>
     function deletePost(formId) {
-        var confirm = window.confirm('Do you want to delete this region?');
+        var confirm = window.confirm('Do you want to delete this city?');
         if(confirm == true) {
             document.getElementById(formId).submit();
         }

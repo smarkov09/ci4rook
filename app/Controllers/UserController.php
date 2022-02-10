@@ -53,7 +53,13 @@ class UserController extends BaseController
 
     public function login()
     {
-        return view('login');
+        if (!session()->get('loggedIn')) {
+            //return redirect()->to('/login');
+            return view('login');
+        }
+        else {
+            return redirect()->to('dashboard');
+        }
     }
 
     public function loginValidate()
