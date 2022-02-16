@@ -79,6 +79,51 @@ $routes->get('cities/edit/(:num)', 'CityController::edit/$1', ['filter' => 'auth
 $routes->put('cities/(:num)', 'CityController::update/$1', ['filter' => 'auth']);
 $routes->delete('cities/(:num)', 'CityController::delete/$1', ['filter' => 'auth']);
 
+// hotels routes
+$routes->get('hotels', 'HotelController::index', ['filter' => 'auth']);
+$routes->get('hotels/new', 'HotelController::new', ['filter' => 'auth']);
+$routes->post('hotels', 'HotelController::create', ['filter' => 'auth']);
+$routes->get('hotels/(:num)', 'HotelController::show/$1', ['filter' => 'auth']);
+$routes->get('hotels/edit/(:num)', 'HotelController::edit/$1', ['filter' => 'auth']);
+$routes->put('hotels/(:num)', 'HotelController::update/$1', ['filter' => 'auth']);
+$routes->delete('hotels/(:num)', 'HotelController::delete/$1', ['filter' => 'auth']);
+
+// programs routes
+$routes->get('programs', 'ProgramController::index', ['filter' => 'auth']);
+$routes->get('programs/new', 'ProgramController::new', ['filter' => 'auth']);
+$routes->post('programs', 'ProgramController::create', ['filter' => 'auth']);
+$routes->get('programs/(:num)', 'ProgramController::show/$1', ['filter' => 'auth']);
+$routes->get('programs/edit/(:num)', 'ProgramController::edit/$1', ['filter' => 'auth']);
+$routes->put('programs/(:num)', 'ProgramController::update/$1', ['filter' => 'auth']);
+$routes->delete('programs/(:num)', 'ProgramController::delete/$1', ['filter' => 'auth']);
+
+// status routes
+$routes->get('status', 'StatusController::index', ['filter' => 'auth']);
+$routes->get('status/new', 'StatusController::new', ['filter' => 'auth']);
+$routes->post('status', 'StatusController::create', ['filter' => 'auth']);
+$routes->get('status/(:num)', 'StatusController::show/$1', ['filter' => 'auth']);
+$routes->get('status/edit/(:num)', 'StatusController::edit/$1', ['filter' => 'auth']);
+$routes->put('status/(:num)', 'StatusController::update/$1', ['filter' => 'auth']);
+$routes->delete('status/(:num)', 'StatusController::delete/$1', ['filter' => 'auth']);
+
+// usertypes routes
+$routes->get('usertypes', 'UsertypeController::index', ['filter' => 'auth']);
+$routes->get('usertypes/new', 'UsertypeController::new', ['filter' => 'auth']);
+$routes->post('usertypes', 'UsertypeController::create', ['filter' => 'auth']);
+$routes->get('usertypes/(:num)', 'UsertypeController::show/$1', ['filter' => 'auth']);
+$routes->get('usertypes/edit/(:num)', 'UsertypeController::edit/$1', ['filter' => 'auth']);
+$routes->put('usertypes/(:num)', 'UsertypeController::update/$1', ['filter' => 'auth']);
+$routes->delete('usertypes/(:num)', 'UsertypeController::delete/$1', ['filter' => 'auth']);
+
+// modules routes
+$routes->get('modules', 'ModuleController::index', ['filter' => 'auth']);
+$routes->get('modules/new', 'ModuleController::new', ['filter' => 'auth']);
+$routes->post('modules', 'ModuleController::create', ['filter' => 'auth']);
+$routes->get('modules/(:num)', 'ModuleController::show/$1', ['filter' => 'auth']);
+$routes->get('modules/edit/(:num)', 'ModuleController::edit/$1', ['filter' => 'auth']);
+$routes->put('modules/(:num)', 'ModuleController::update/$1', ['filter' => 'auth']);
+$routes->delete('modules/(:num)', 'ModuleController::delete/$1', ['filter' => 'auth']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

@@ -102,6 +102,64 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Hotels
+            </div>
+
+            <li class="nav-item <?= (current_url() == base_url('/hotels')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/hotels')) ? 'active' : ''; ?>" href="<?= site_url('hotels') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Hotels</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Programs
+            </div>
+
+            <li class="nav-item <?= (current_url() == base_url('/programs')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/programs')) ? 'active' : ''; ?>" href="<?= site_url('programs') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Programs</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Status
+            </div>
+
+            <li class="nav-item <?= (current_url() == base_url('/status')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/status')) ? 'active' : ''; ?>" href="<?= site_url('status') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Status</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                System Config
+            </div>
+
+            <li class="nav-item <?= (current_url() == base_url('/usertypes')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/usertypes')) ? 'active' : ''; ?>" href="<?= site_url('usertypes') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>User types</span></a>
+            </li>
+            <li class="nav-item <?= (current_url() == base_url('/modules')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/modules')) ? 'active' : ''; ?>" href="<?= site_url('modules') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Modules</span></a>
+            </li>
+
             
 
             <!-- Divider -->
