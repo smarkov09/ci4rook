@@ -64,6 +64,7 @@ $this->section('title') ?> User types <?= $this->endSection() ?>
                                                         <input type="hidden" name="_method" value="DELETE"/>
                                                             <a href="javascript:void(0)" onclick="deletePost('postDeleteForm<?=$program['id']?>')" class="btn btn-sm btn-danger" title="Delete"><i class="fas fa-trash-alt"></i></a>
                                                         </form>
+                                                        <a href="<?= base_url('usersmodules/edit/'.$program['id']) ?>" class="btn btn-sm btn-warning mx-1" title="Config"><i class="fas fa-user-cog"></i></a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach;

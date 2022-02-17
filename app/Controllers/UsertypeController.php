@@ -6,6 +6,8 @@ use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\Usertype;
 
+use App\Models\Usersmodules;
+
 class UsertypeController extends ResourceController
 {
     private $utype;

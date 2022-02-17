@@ -124,6 +124,10 @@ $routes->get('modules/edit/(:num)', 'ModuleController::edit/$1', ['filter' => 'a
 $routes->put('modules/(:num)', 'ModuleController::update/$1', ['filter' => 'auth']);
 $routes->delete('modules/(:num)', 'ModuleController::delete/$1', ['filter' => 'auth']);
 
+// usertype_modules routes
+$routes->get('usersmodules/edit/(:num)', 'UsersmodulesController::edit/$1', ['filter' => 'auth']);
+$routes->post('usersmodules/check', 'UsersmodulesController::check', ['filter' => 'auth']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
