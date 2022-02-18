@@ -45,12 +45,16 @@ $routes->put('posts/(:num)', 'PostController::update/$1');
 $routes->delete('posts/(:num)', 'PostController::delete/$1');
 
 // user auth & register routes
-$routes->get('register', 'UserController::register');
-$routes->post('register', 'UserController::create');
+$routes->get('register', 'UserController::register', ['filter' => 'auth']);
+$routes->post('register', 'UserController::create', ['filter' => 'auth']);
 $routes->get('login', 'UserController::login');
 $routes->post('login', 'UserController::loginValidate');
 $routes->get('dashboard', 'UserController::dashboard', ['filter' => 'auth']);
 $routes->get('logout', 'UserController::logout');
+$routes->get('users', 'UserController::index', ['filter' => 'auth']);
+$routes->get('users/(:num)', 'UserController::show/$1', ['filter' => 'auth']);
+$routes->get('users/new', 'UserController::new', ['filter' => 'auth']);
+$routes->post('users', 'UserController::create_u', ['filter' => 'auth']);
 
 // countries routes
 $routes->get('countries', 'CountryController::index', ['filter' => 'auth']);
@@ -114,6 +118,7 @@ $routes->get('usertypes/(:num)', 'UsertypeController::show/$1', ['filter' => 'au
 $routes->get('usertypes/edit/(:num)', 'UsertypeController::edit/$1', ['filter' => 'auth']);
 $routes->put('usertypes/(:num)', 'UsertypeController::update/$1', ['filter' => 'auth']);
 $routes->delete('usertypes/(:num)', 'UsertypeController::delete/$1', ['filter' => 'auth']);
+$routes->post('usertypes/update_permission', 'UsertypeController::update_permission', ['filter' => 'auth']);
 
 // modules routes
 $routes->get('modules', 'ModuleController::index', ['filter' => 'auth']);

@@ -159,6 +159,11 @@
                 <i class="fas fa-address-book"></i>
                     <span>Modules</span></a>
             </li>
+            <li class="nav-item <?= (current_url() == base_url('/users')) ? 'active' : ''; ?>">
+                <a class="nav-link <?= (current_url() == base_url('/users')) ? 'active' : ''; ?>" href="<?= site_url('users') ?>">
+                <i class="fas fa-address-book"></i>
+                    <span>Users</span></a>
+            </li>
 
             
 

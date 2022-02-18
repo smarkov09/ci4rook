@@ -40,9 +40,10 @@ class Usersmodules extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function new_user_modules($usertype_id)
+    public function new_user_modules($usertype_id, $modules_row_count)
     {
-        $table_row_count = $this->db->countAll('modules');
+        //$table_row_count = $this->db->countAll('modules');
+        $table_row_count = $modules_row_count;
         $i = 1;
         for ($i; $i <= $table_row_count; $i++) {
             $start = [
@@ -51,10 +52,11 @@ class Usersmodules extends Model
                 'read' => 0,
                 'create' => 0,
                 'update' => 0,
-                'update' => 0,
+                'delete' => 0,
                 'print' => 0
             ];
-            $this->db->insert($this->table, $start);
+            //$this->db->insert($this->table, $start);
+            $this->db->table($this->table)->insert($start);
         }
     }
 
@@ -72,13 +74,21 @@ class Usersmodules extends Model
     public function fetch_users_modules($usertype)
     {
         $data = array();
-        $db = \Config\Database::connect();
-        $builder = $db->table($this->table);
-        $builder->where('usertype_id', $usertype);
-        $builder->orderBy('module_id', 'ASC');
-        
-        if ($builder->get()->getResult()) {
-            foreach ($builder->get()->getResult() as $row) {
+
+        /******
+         * 
+         * ****/
+        $db = db_connect();
+        $sql = "SELECT * FROM usersmodules WHERE usertype_id = " . $usertype;
+
+        // for debug
+        /*$query = $db->query($sql);
+        $query = $db->getLastQuery();
+        echo (string) $query;
+        die();*/
+
+        if ($query = $db->query($sql)) {
+            foreach ($query->getResult() as $row) {
                 $module_name = $this->get_field('name', 'modules', $row->module_id, 'id');
                 $row->module_name = $module_name;
                 $data[] = $row;
@@ -86,22 +96,37 @@ class Usersmodules extends Model
             return $data;
         }
         return false;
+    }
 
-        /*$this->db->where('usertype_id', $usertype);
-        $this->db->order_by('module_id', 'ASC');
-        $query = $this->db->get($this->table);*/
-/*
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $module_name = $this->get_field('name', 'modules', $row->module_id, 'id');
-
-                $row->module_name = $module_name;
-                $data[] = $row;
-            }
-
-            return $data;
+    public function update_p($id, $data)
+    {
+        /*$db = db_connect();
+        $db->where('id', $id);
+        if ($db->update($this->table, $data)) {
+          return TRUE;
+        } else {
+          return FALSE;
+        }*/
+        /*$sql = "UPDATE usersmodules SET ". $data ." WHERE usertype_id = " . $id;
+        if ($query = $db->query($sql)) {
+            return true;
+        }
+        else {
+            return false;
+        }*/
+        /*var_dump($data);
+        print_r($data);
+        print_r($id);
+        die();*/
+        $db      = \Config\Database::connect();
+        $builder = $db->table('usersmodules');
+        $builder->where('id', $id);
+        if ($builder->update($data)) {
+            return true;
+        }
+        else {
+            return false;
         }
 
-        return false;*/
     }
 }

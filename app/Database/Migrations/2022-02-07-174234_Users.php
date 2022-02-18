@@ -26,6 +26,18 @@ class Users extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255'
             ],
+            'phone' => [
+                'type' => 'VARCHAR',
+                'constraint' => '16'
+            ],
+            'active' => [
+                'type' => 'TINYINT',
+                'constraint' => '4'
+            ],
+            'usertype_id' => [
+                'type' => 'TINYINT',
+                'constraint' => '4'
+            ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
         ]);

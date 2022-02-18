@@ -26,6 +26,8 @@ class UsersmodulesController extends BaseController
     {
         $utype = $this->utype->find($id);
         //$this->data['ums'] = $this->usermodule->where('usertype_id', $utype['id'])->findAll();
+        /*echo $utype['id'];
+        die();*/
         $this->data['ums'] = $this->usermodule->fetch_users_modules($utype['id']);
         $this->data['utype'] = $utype;
 
@@ -42,9 +44,11 @@ class UsersmodulesController extends BaseController
     public function check()
     {
         $checks = [
-            'cbxs' => $this->request->getPost('cbox'),
-            'usrbxs' => $this->request->getPost('usrcbox'),
-            'htlbxs' => $this->request->getPost('htlcbox')
+            'cbxr' => $this->request->getPost('rprop'),
+            'cbxc' => $this->request->getPost('cprop'),
+            'cbxu' => $this->request->getPost('uprop'),
+            'cbxd' => $this->request->getPost('dprop'),
+            'cbxp' => $this->request->getPost('pprop')
         ];
 
         $chkjson = json_encode($checks);

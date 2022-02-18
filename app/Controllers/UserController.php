@@ -21,7 +21,8 @@ class UserController extends BaseController
 
     public function index()
     {
-        //
+        $users = $this->user->orderBy('id', 'desc')->findAll();
+        return view('users/index', compact('users'));
     }
 
     public function register()
@@ -114,6 +115,60 @@ class UserController extends BaseController
         $session = session();
         $session->destroy();
         return redirect()->to('login');
+    }
+
+    public function show($id = null)
+    {
+        //$user = $this->user->find($id);
+
+        $data['user'] = $this->user->find($id);
+
+        $ankh = new \App\Models\Ankh();
+        $data['usertype'] = $ankh->get_field('name', 'usertypes', $id, 'id');
+
+        if ($data['user']) {
+            //return view('users/show', compact('user'));
+            return view('users/show', $data);
+        }
+        else {
+            return redirect()->to('/users');
+        }
+    }
+
+    public function new()
+    {
+        $usertype = new \App\Models\Usertype();
+        $data['usertype'] = $usertype->orderBy('name', 'DESC')->findAll();
+
+        return view('users/create', $data);
+    }
+
+    public function create_u()
+    {
+        $inputs = $this->validate([
+            'name' => 'required',
+            'email' => 'required|is_unique[users.email]',
+            'password' => 'required',
+            'phone' => 'required',
+            'usertype' => 'required',
+        ]);
+
+        if (!$inputs) {
+            return view('users/create', [
+                'validation' => $this->validator
+            ]);
+        }
+
+        $this->user->save([
+            'name' => $this->request->getVar('name'),
+            'email' => $this->request->getVar('email'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'phone' => $this->request->getVar('phone'),
+            'usertype' => $this->request->getVar('usertype')
+        ]);
+
+        session()->setFlashdata('success', 'Success! user created.');
+        return redirect()->to(site_url('/users'));
     }
 
 }

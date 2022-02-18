@@ -5,12 +5,14 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\Usertype;
-
 use App\Models\Usersmodules;
+use App\Models\Module;
 
 class UsertypeController extends ResourceController
 {
     private $utype;
+    private $usermodule;
+    private $module;
 
     public function __construct()
     {
@@ -77,7 +79,17 @@ class UsertypeController extends ResourceController
 
         $this->utype->save([
             'name' => $this->request->getVar('name')
-        ]);
+        ]);        
+
+        $db = \Config\Database::connect();
+        $lastID = $db->insertID();
+        //echo $lastID;
+        $this->module = new Module;
+        $module_num_rows = $this->module->numRows('modules');
+
+        $this->usermodule = new Usersmodules;
+        $this->usermodule->new_user_modules($lastID, $module_num_rows);
+        //die();
 
         session()->setFlashdata('success', 'Success! User type created.');
         return redirect()->to(site_url('/usertypes'));
@@ -137,5 +149,26 @@ class UsertypeController extends ResourceController
         $this->utype->delete($id);
         session()->setFlashdata('success', 'Success! User type deleted.');
         return redirect()->to(base_url('/usertypes'));
+    }
+
+    public function update_permission()
+    {
+        // usar usermodels model
+        $rid = $this->request->getPost('um_id');
+        $col = $this->request->getPost('um_col');
+        $val = $this->request->getPost('um_val');
+        $data = [
+            $col => $val
+        ];
+        /*print_r($rid);
+        print_r($data);
+        die();*/
+        $this->usermodule = new Usersmodules;
+        if ($this->usermodule->update_p($rid, $data)) {
+            echo 'YES';
+        }
+        else {
+            echo 'NO';
+        }
     }
 }

@@ -39,4 +39,12 @@ class Module extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function numRows($table)
+    {
+        $sql = "SELECT COUNT(*) as Count FROM " . $table;
+        $result = $this->db->query($sql);
+        $row = $result->getRow();
+        return $count = $row->Count;
+    }
 }

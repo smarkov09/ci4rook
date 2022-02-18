@@ -12,20 +12,21 @@ $this->section('title') ?> User types <?= $this->endSection() ?>
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">Config <b><?= $utype['name']; ?></b> - Modules permissions</h1>
 
-<?php var_dump($utype); ?>
-<?php echo '<hr>'; ?>
-<?php var_dump($ums); ?>
+<?php //var_dump($utype); ?>
+<?php //echo '<hr>'; ?>
+<?php //var_dump($ums); ?>
 
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
 
-                          <form class="needs-validation" novalidate action="/usersmodules/check" method="post">
+                          <form class="needs-validation" novalidate action="" method="post">
                             <input type="hidden" name="usertype_id" value="<?= $utype['id'] ?>">
 
                             <!--<h6 class="m-0 font-weight-bold text-primary">Posts</h6>-->
                             <div class="text-end">
                               <!--<a href="<?= base_url('usertypes/new') ?>" class="btn btn-primary">Save changes</a>-->
-                              <button class="w-30 btn btn-primary" type="submit">Save changes</button>
+                              <!--<button class="w-30 btn btn-primary" type="submit">Save changes</button>-->
+                              <a href="<?= base_url('usertypes') ?>" class="btn btn-primary">Back to User types</a>
                             </div>
                             <?php
                         if(session()->getFlashdata('success')):?>
@@ -45,6 +46,10 @@ $this->section('title') ?> User types <?= $this->endSection() ?>
                     <?php endif; ?>
                         </div>
                         <div class="card-body">
+
+      <?= session()->getFlashdata('error') ?>
+      <?= service('validation')->listErrors() ?>
+
 <div class="table-responsive">
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <thead>
@@ -70,7 +75,7 @@ if ($ums) {
       'checked' => $data->read ? true : false,
       'data-id' => $data->id,
       'data-field' => 'read',
-      'class' => ''
+      'class' => 'rockbottom'
     ];
     echo '<td class="">'.form_checkbox($cboxread).' read</td>';
     $ctrl++;
@@ -81,7 +86,7 @@ if ($ums) {
       'checked' => $data->create ? true : false,
       'data-id' => $data->id,
       'data-field' => 'create',
-      'class' => ''
+      'class' => 'rockbottom'
     ];
     echo '<td class="">'.form_checkbox($cboxcreate).' create</td>';
     $ctrl++;
@@ -92,7 +97,7 @@ if ($ums) {
       'checked' => $data->update ? true : false,
       'data-id' => $data->id,
       'data-field' => 'update',
-      'class' => ''
+      'class' => 'rockbottom'
     ];
     echo '<td class="">'.form_checkbox($cboxupdate).' update</td>';
     $ctrl++;
@@ -103,7 +108,7 @@ if ($ums) {
       'checked' => $data->delete ? true : false,
       'data-id' => $data->id,
       'data-field' => 'delete',
-      'class' => ''
+      'class' => 'rockbottom'
     ];
     echo '<td class="">'.form_checkbox($cboxdelete).' delete</td>';
     $ctrl++;
@@ -114,7 +119,7 @@ if ($ums) {
       'checked' => $data->print ? true : false,
       'data-id' => $data->id,
       'data-field' => 'print',
-      'class' => ''
+      'class' => 'rockbottom'
     ];
     echo '<td class="">'.form_checkbox($cboxprint).' print</td>';
   }
@@ -125,139 +130,46 @@ if ($ums) {
 
 
 
-      <?= session()->getFlashdata('error') ?>
-      <?= service('validation')->listErrors() ?>
-
-      
-
-        <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-  <thead>
-    <tr>
-      <th scope="col">Module</th>
-      <th scope="col">List</th>
-      <th scope="col">Add</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-      <th scope="col">Print</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">Users</th>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="usrcb1" name="usrcbox[]" value="ucb1">
-          <label class="form-check-label" for="usrcb1">list</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="usrcb2" name="usrcbox[]" value="ucb2">
-          <label class="form-check-label" for="usrcb2">add</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="usrcb3" name="usrcbox[]" value="ucb3">
-          <label class="form-check-label" for="usrcb3">edit</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="usrcb4" name="usrcbox[]" value="ucb4">
-          <label class="form-check-label" for="usrcb4">delete</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="usrcb5" name="usrcbox[]" value="ucb5">
-          <label class="form-check-label" for="usrcb5">print</label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Hotels</th>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="htlcb1" name="htlcbox[]" value="hcb1">
-          <label class="form-check-label" for="hcb1">print</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="htlcb2" name="htlcbox[]" value="hcb2">
-          <label class="form-check-label" for="hcb2">print</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="htlcb3" name="htlcbox[]" value="hcb3">
-          <label class="form-check-label" for="hcb3">print</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="htlcb4" name="htlcbox[]" value="hcb4">
-          <label class="form-check-label" for="hcb4">print</label>
-        </div>
-      </td>
-      <td>
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="htlcb5" name="htlcbox[]" value="hcb5">
-          <label class="form-check-label" for="hcb5">print</label>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">Countries</th>
-      <td>cty chkbx list</td>
-      <td>cty chkbx add</td>
-      <td>cty chkbx edit</td>
-      <td>cty chkbx delete</td>
-      <td>cty chkbx print</td>
-    </tr>
-    <tr>
-      <th scope="row">Status</th>
-      <td>sts chkbx list</td>
-      <td>sts chkbx add</td>
-      <td>sts chkbx edit</td>
-      <td>sts chkbx delete</td>
-      <td>sts chkbx print</td>
-    </tr>
-    <tr>
-      <th scope="row">Leads</th>
-      <td>lds chkbx list</td>
-      <td>lds chkbx add</td>
-      <td>lds chkbx edit</td>
-      <td>lds chkbx delete</td>
-      <td>lds chkbx print</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="cb1" name="cbox[]" value="cb1">
-          <label class="form-check-label" for="cb1">Shipping address is the same as my billing address</label>
-        </div>
-
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="cb2" name="cbox[]" value="cb2">
-          <label class="form-check-label" for="cb2">Save this information for next time</label>
-        </div>
-
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="cb3" name="cbox[]" value="cb3">
-          <label class="form-check-label" for="cb3">Save this information for next time</label>
-        </div>
-
-        <!--<button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>-->
-
 
       </form>
 
 
 
+<?= $this->endSection(); ?>
+
+
+<?= $this->section('pageLevelCustomScripts') ?>
+<script>
+    $(".rockbottom").click(function () {
+      var umid = $(this).attr("data-id");
+      var umcol = $(this).attr("data-field");
+      var umval = $(this).attr("value");
+      if (umval == 0) {
+        umval = 1;
+      } else {
+        umval = 0;
+      }
+      console.log(umid);
+      console.log(umcol);
+      console.log(umval);
+      /*alert("Clicked Rockbottom! dID =" + $(this).attr("data-id") + " colID = " + $(this).attr("data-field") + " umVAL = " + umval);*/
+      $.ajax({
+        type: 'POST',
+        data: {
+          um_id: umid,
+          um_col: umcol,
+          um_val: umval
+        },
+        url: "<?php echo base_url('usertypes/update_permission')?>",
+        success: function(msg) {
+          if (msg == 'YES') {
+              window.location.reload();
+          }
+        },
+        error: function() {
+          alert("ERROR");
+        }
+      });
+    });
+    </script>
 <?= $this->endSection(); ?>
